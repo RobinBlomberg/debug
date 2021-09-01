@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+const chalk = require('chalk');
 
 const _debug = (...args) => {
   if (process.env.NODE_ENV === 'development') {
