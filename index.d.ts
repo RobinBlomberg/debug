@@ -1,7 +1,7 @@
 export const debug: {
-  <T>(...args: [T, ...unknown[]]): T;
-  error<T>(...args: [T, ...unknown[]]): T;
-  info<T>(...args: [T, ...unknown[]]): T;
-  success<T>(...args: [T, ...unknown[]]): T;
-  warn<T>(...args: [T, ...unknown[]]): T;
+  <T>(...values: [T, ...unknown[]]): T;
+  error<T>(...values: [T, ...unknown[]]): T;
+  info<T>(...values: [T, ...unknown[]]): T;
+  success<T>(...values: [T, ...unknown[]]): T;
+  warn<T>(...values: [T, ...unknown[]]): T;
 };

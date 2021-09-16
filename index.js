@@ -1,18 +1,53 @@
 const chalk = require('chalk');
+const { inspect } = require('util');
 
-const _debug = (...args) => {
+/**
+ * @param {...unknown} values
+ */
+const _debug = (...values) => {
   if (process.env.NODE_ENV === 'development') {
-    console.debug(...args);
+    console.debug(...values);
   }
 
-  return args[0];
+  return values[0];
+};
+
+/**
+ * @param {unknown[]} values
+ */
+const _inspect = (values) => {
+  return values.map((value) => {
+    return value instanceof Object
+      ? inspect(value, { colors: true })
+      : value;
+  }).join(' ');
 };
 
 const debug = Object.assign(_debug, {
-  error: (...args) => _debug(chalk.red(`✗ ${args[0]}`), ...args.slice(1)),
-  info: (...args) => _debug(chalk.blue(`• ${args[0]}`), ...args.slice(1)),
-  success: (...args) => _debug(chalk.green(`✓ ${args[0]}`), ...args.slice(1)),
-  warn: (...args) => _debug(chalk.yellow(`⚠ ${args[0]}`), ...args.slice(1)),
+  /**
+   * @param {...unknown} values
+   */
+  error: (...values) => {
+    return _debug(chalk.red(`✗ ${_inspect(values)}`))
+  },
+  /**
+   * @param {...unknown} values
+   */
+  info: (...values) => {
+    return _debug(chalk.blue(`• ${_inspect(values)}`))
+  },
+  /**
+   * @param {...unknown} values
+   */
+  success: (...values) => {
+    return _debug(chalk.green(`✓ ${_inspect(values)}`))
+  },
+  /**
+   * @param {...unknown} values
+   */
+  warn: (...values) => {
+    return _debug(chalk.yellow(`⚠ ${_inspect(values)}`))
+  },
 });
 
 module.exports = { debug };
