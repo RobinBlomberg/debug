@@ -5,7 +5,7 @@ const { inspect } = require('util');
  * @param {...unknown} values
  */
 const _debug = (...values) => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     console.debug(...values);
   }
 
